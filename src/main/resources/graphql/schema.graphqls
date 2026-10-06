@@ -1,0 +1,123 @@
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    role: String!
+}
+
+type AuthPayload {
+    token: String!
+    user: User!
+}
+
+type Query {
+    # Permet de tester si le token fonctionne et de récupérer l'utilisateur connecté
+    me: User
+}
+
+type Mutation {
+    register(email: String!, password: String!, name: String!, role: String!): AuthPayload!
+    login(email: String!, password: String!): AuthPayload!
+}
+
+type Department {
+    id: ID!
+    name: String!
+}
+
+type CourseSummary {
+    id: ID!
+    title: String!
+    level: String!
+}
+
+type Course {
+    id: ID!
+    title: String!
+    description: String
+    level: String!
+    archived: Boolean!
+    department: Department
+    instructor: User
+    prerequisites: [CourseSummary!]
+}
+
+# On étend le type Query existant
+extend type Query {
+    getCourseCatalog(departmentId: ID, instructorId: ID, level: String): [Course!]!
+}
+
+# On étend le type Mutation existant
+extend type Mutation {
+    createCourse(title: String!, description: String, level: String!, departmentId: ID!, instructorId: ID!): Course!
+    updateCourse(id: ID!, title: String, description: String, level: String): Course!
+    archiveCourse(id: ID!): Boolean!
+    addCoursePrerequisite(courseId: ID!, prerequisiteId: ID!): Course!
+}
+
+# Ajout des types pour le module de parcours
+type Enrollment {
+    id: ID!
+    date: String!
+    status: String!
+    course: Course!
+}
+
+type Pathway {
+    takenCourses: [Course!]!
+    remainingCourses: [Course!]!
+}
+
+# Mise à jour du type User (étudiant) pour voir ses inscriptions
+extend type User {
+    enrollments: [Enrollment!]
+}
+
+extend type Mutation {
+    # Permettre aux étudiants de s'inscrire à des cours
+    enrollStudentInCourse(studentId: ID!, courseId: ID!): Boolean
+}
+
+extend type Query {
+    # Visualiser le graphe des cours suivis et restants
+    getStudentPathway(studentId: ID!, departmentId: ID!): Pathway!
+}
+
+# On définit le DTO de retour pour le chemin le plus court
+type ShortestPath {
+    startCourseId: ID!
+    targetCourseId: ID!
+    pathLength: Int!
+    pathCourses: [Course!]!
+}
+
+# On étend le type Query existant
+extend type Query {
+    # Filtrage collaboratif via requêtes Cypher
+    getCourseRecommendations(studentId: ID!): [Course!]!
+
+    # Chemin le plus court (Shortest Path)
+    getShortestCertificationPath(startCourseId: ID!, targetCourseId: ID!): ShortestPath!
+}
+
+# DTO pour le rapport de charge horaire
+type ProfessorLoad {
+    professorName: String!
+    professorEmail: String!
+    courseCount: Int!
+}
+
+extend type Query {
+    # Gestion des profils
+    getUsersByRole(role: String): [User!]!
+
+    # Tableaux de bord
+    getStudentsInCourse(courseId: ID!): [User!]!
+    getTeachingLoadReport: [ProfessorLoad!]!
+}
+
+extend type Mutation {
+    # Mise à jour et suppression des profils
+    updateUserProfile(id: ID!, name: String, email: String, role: String): User!
+    deleteUser(id: ID!): Boolean!
+}
