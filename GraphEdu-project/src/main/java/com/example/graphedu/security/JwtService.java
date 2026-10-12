@@ -18,7 +18,7 @@ import java.util.function.Function;
 public class JwtService {
 
     // Clé secrète (À mettre dans application.properties en production)
-    private static final String SECRET_KEY = "votre_cle_secrete_tres_longue_et_securisee_pour_le_projet_graphedu_2026";
+    private static final String SECRET_KEY = "votre_cle_secrete_tres_longue_et_securisee";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
