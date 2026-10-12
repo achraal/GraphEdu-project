@@ -1,4 +1,4 @@
-# 🎓 GraphEdu - Plateforme Académique Intelligente Orientée Graphe
+# 🎓 Sapientia - Plateforme Académique Intelligente Orientée Graphe
 
 [![Neo4j](https://img.shields.io/badge/Neo4j-Graph%20Database-45818e?style=for-the-badge&logo=neo4j&logoColor=white)](https://neo4j.com/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -7,7 +7,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-> **GraphEdu** est une plateforme éducative moderne tirant parti de la puissance des **bases de données orientées graphe (Neo4j)** et de **GraphQL** pour orchestrer la gestion académique : cartographie des cours, validation intelligente des prérequis, calcul du chemin optimal de certification et recommandations personnalisées par filtrage collaboratif.
+> **Sapientia** est une plateforme éducative moderne tirant parti de la puissance des **bases de données orientées graphe (Neo4j)** et de **GraphQL** pour orchestrer la gestion académique : cartographie des cours, validation intelligente des prérequis, calcul du chemin optimal de certification et recommandations personnalisées par filtrage collaboratif.
 
 ---
 
@@ -44,13 +44,13 @@ graph LR
 ## 📦 Organisation du Répertoire
 
 ```
-GraphEdu/
-├── GraphEdu-project/       # Backend : API Spring Boot 4, Neo4j, GraphQL, JWT
+Sapientia/
+├── Sapientia-project/       # Backend : API Spring Boot 4, Neo4j, GraphQL, JWT
 │   ├── src/
 │   ├── pom.xml
 │   └── README.md
 │
-├── graphedu-frontend/      # Frontend : SPA React 19, TypeScript, Apollo, Tailwind
+├── Sapientia-frontend/      # Frontend : SPA React 19, TypeScript, Apollo, Tailwind
 │   ├── src/
 │   ├── package.json
 │   └── README.md
@@ -72,7 +72,7 @@ GraphEdu/
 
 ## 🧠 Puissance du Moteur de Graphe (Neo4j)
 
-GraphEdu exploite la théorie des graphes pour résoudre des problématiques complexes :
+Sapientia exploite la théorie des graphes pour résoudre des problématiques complexes :
 
 1. **Shortest Path (Chemin Optimal)** : Utilise l'algorithme natif `shortestPath()` de Cypher pour identifier la séquence de cours la plus rapide afin d'atteindre un module cible ou une certification.
 2. **Filtrage Collaboratif** : Analyse les traversées de graphe `(Étudiant)-[:ENROLLED_IN]->(Cours)<-[:ENROLLED_IN]-(Pair)-[:ENROLLED_IN]->(Candidat)` pour suggérer les cours les plus populaires au sein d'une cohorte similaire.
@@ -93,7 +93,7 @@ GraphEdu exploite la théorie des graphes pour résoudre des problématiques com
 
 1. Rendez-vous dans le dossier backend :
    ```bash
-   cd GraphEdu-project
+   cd Sapientia-project
    ```
 2. Configurez vos identifiants Neo4j dans `src/main/resources/application.properties` :
    ```properties
@@ -117,7 +117,7 @@ GraphEdu exploite la théorie des graphes pour résoudre des problématiques com
 
 1. Rendez-vous dans le dossier frontend :
    ```bash
-   cd graphedu-frontend
+   cd Sapientia-frontend
    ```
 2. Installez les dépendances :
    ```bash
